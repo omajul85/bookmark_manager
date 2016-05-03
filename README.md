@@ -27,3 +27,5 @@ As I user
 So that I can search my list easily (faster)
 I’d like to filter links by tag
 ``````
+## Domain Model 
+![Diagram](http://s19.postimg.org/akmnannxv/Bookmark.png)
