@@ -1,16 +1,13 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "data_mapper"
-gem "dm-postgres-adapter"
+gem 'data_mapper'
+gem 'dm-postgres-adapter'
 gem "dm-migrations"
 gem "sinatra"
 
 group :test do
-  gem 'rspec'
-  gem 'rubocop-rspec'
-  gem 'rubocop'
-  gem 'coveralls', require: false
   gem 'capybara'
+  gem 'rspec'
   gem 'rspec-sinatra'
-  gem 'byebug'
+  gem 'database_cleaner'
 end

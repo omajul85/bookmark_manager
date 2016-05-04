@@ -1,16 +1,15 @@
 require 'spec_helper'
 
-feature 'Creating links' do
-  scenario 'Add a new link to the DB' do
+feature 'Creating Link' do
+  scenario 'user can add a link to database' do
     visit '/links/new'
-    fill_in :title,	with: 'Marca'
-    fill_in :url,		with: 'http://www.marca.com/'
-    click_button 'Create link'
 
-    expect(current_path).to eq '/./links'
+    fill_in :title, with: "W3Schools"
+    fill_in :url, with: "http://www.w3schools.com/"
+    fill_in :tags,  with: 'education'
 
-    within 'ul#links' do
-      expect(page).to have_content('Marca')
-    end
+    click_button "Add Bookmark"
+    link = Link.first
+    expect(link.tags.map(&:name)).to include('education')  
   end
 end
