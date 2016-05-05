@@ -3,18 +3,17 @@ ENV['RACK_ENV'] ||= 'development'
 require 'sinatra/base'
 require './data_mapper_setup'
 
-
-helpers do
-  # returns an instance of User for the currently logged-in user
-  def current_user
-    @current_user ||= User.get(session[:user_id])
-  end
-end
-
 class BM < Sinatra::Base
 
   enable :sessions
   set :session_secret, 'super secret'
+
+  helpers do
+    # returns an instance of User for the currently logged-in user
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
+  end
   
   get '/links' do
     @links = Link.all
