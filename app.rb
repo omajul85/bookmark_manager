@@ -16,8 +16,9 @@ class BM < Sinatra::Base
 
   post '/links' do
     link = Link.new(title: params[:title], url: params[:url])
-    tag = Tag.create(name: params[:tags])
-    link.tags << tag
+    params[:tags].split.each do |tag|
+      link.tags << Tag.create(name: tag)
+    end
     link.save
     redirect '/links'
   end
