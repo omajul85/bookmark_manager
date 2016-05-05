@@ -40,7 +40,8 @@ class BM < Sinatra::Base
   end
 
   post '/users' do
-    user = User.create(email: params[:email], password: params[:password])
+    user = User.create(email: params[:email], password: params[:password], 
+      password_confirmation: params[:password_confirmation])
     
     #save the user_id in the session
     session[:user_id] = user.id
