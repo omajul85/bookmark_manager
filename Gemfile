@@ -5,6 +5,7 @@ gem 'dm-postgres-adapter'
 gem 'dm-migrations'
 gem 'sinatra'
 gem 'rake'
+gem 'bcrypt'
 
 group :test do
   gem 'capybara'

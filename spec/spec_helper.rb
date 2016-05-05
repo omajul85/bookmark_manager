@@ -3,7 +3,9 @@ ENV['RACK_ENV'] = 'test'
 require 'capybara/rspec'
 require './models/link'
 require './models/tag'
+require './models/user'
 require 'database_cleaner'
+require 'web_helper'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 

@@ -3,8 +3,19 @@ ENV['RACK_ENV'] ||= 'development'
 require 'sinatra/base'
 require './data_mapper_setup'
 
+
+helpers do
+  # returns an instance of User for the currently logged-in user
+  def current_user
+    @current_user ||= User.get(session[:user_id])
+  end
+end
+
 class BM < Sinatra::Base
 
+  enable :sessions
+  set :session_secret, 'super secret'
+  
   get '/links' do
     @links = Link.all
     erb :'links/index'
@@ -27,6 +38,18 @@ class BM < Sinatra::Base
     tag = Tag.all(name: params[:name])
     @links = tag ? tag.links : []
     erb :'links/index'
+  end
+
+  post '/users' do
+    user = User.create(email: params[:email], password: params[:password])
+    
+    #save the user_id in the session
+    session[:user_id] = user.id
+    redirect '/links'
+  end
+
+  get '/users/new' do
+    erb :'/users/new'
   end
 
   # start the server if ruby file executed directly
