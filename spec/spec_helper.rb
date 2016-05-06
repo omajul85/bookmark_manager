@@ -5,13 +5,15 @@ require './models/link'
 require './models/tag'
 require './models/user'
 require 'database_cleaner'
-require 'web_helper'
+require_relative 'helpers/session'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
 Capybara.app = BM
 
 RSpec.configure do |config|
+
+  config.include SessionHelpers
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

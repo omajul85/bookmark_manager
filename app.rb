@@ -6,6 +6,7 @@ require './data_mapper_setup'
 
 class BM < Sinatra::Base
 
+  use Rack::MethodOverride
   enable :sessions
   register Sinatra::Flash
   set :session_secret, 'super secret'
@@ -74,6 +75,13 @@ class BM < Sinatra::Base
 
   get '/sessions/new' do
     erb :'/sessions/new'
+  end
+
+  delete '/sessions' do
+    session[:user_id] = nil
+    # Keep to persist the flash notice over the redirect.
+    flash.keep[:notice] = 'Goodbye!'
+    redirect '/links'
   end
 
   # start the server if ruby file executed directly
