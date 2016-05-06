@@ -25,6 +25,12 @@ class User
   	self.password_digest = BCrypt::Password.create(password)
   end
 
+  def self.authenticate(email, password)
+    # first matching record with the given email
+    user = first(email: email)
+    # user && BCrypt::Password.new(user.password_digest) == password ? user : nil
+    user && BCrypt::Password.new(user.password_digest).is_password?(password) ? user : nil
+  end
 end
 
 # validates_confirmation_of is a DataMapper method
