@@ -2,14 +2,17 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
 require 'sinatra/flash'
-require './data_mapper_setup'
+require 'sinatra/partial'
+require './app/data_mapper_setup'
 
 class BM < Sinatra::Base
 
   use Rack::MethodOverride
   enable :sessions
   register Sinatra::Flash
+  register Sinatra::Partial
   set :session_secret, 'super secret'
+  set :partial_template_engine, :erb
 
   helpers do
     # returns an instance of User for the currently logged-in user

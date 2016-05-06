@@ -1,13 +1,12 @@
 ENV['RACK_ENV'] = 'test'
 
 require 'capybara/rspec'
-require './models/link'
-require './models/tag'
-require './models/user'
 require 'database_cleaner'
+require './app/app'
+require './app/models/link'
+require './app/models/tag'
+require './app/models/user'
 require_relative 'helpers/session'
-
-require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
 Capybara.app = BM
 
